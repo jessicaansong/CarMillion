@@ -1,0 +1,174 @@
+﻿@model CarList.Models.CarViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+                                    <style>
+                                        body{
+                                            background: black;
+                                            margin-top: 50px /*move the top of the page's body down 50 px*/
+                                        }
+                                        h2{
+                                            text-transform: uppercase;
+                                        }
+                                        dt{
+                                            text-transform: capitalize;
+                                        }
+                                        dd{
+                                            text-transform: capitalize;
+                                        }
+                                    </style>
+
+<div class="container">
+    
+   
+
+
+
+
+
+
+
+
+     
+
+
+
+
+
+        <div id="details">
+         
+
+            <div class="well" style="background-color: grey">
+                <h2 style="color: orange"><strong> @Html.DisplayFor(model => model.Car.model_year) @Html.DisplayFor(model => model.Car.make) @Html.DisplayFor(model => model.Car.model_name)</strong></h2>
+
+
+                <img class="img-responsive well" src="@Model.Image" />
+          
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Car.make)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Car.make)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Car.model_name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Car.model_name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Car.model_trim)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Car.model_trim)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Car.model_year)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Car.model_year)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Car.body_style)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Car.body_style)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Car.engine_cc)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Car.engine_cc)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Car.engine_num_cyl)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Car.engine_num_cyl)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+   
+      
+        @* ------------Tabs------------ *@
+
+        @*<div class="col-md-11">*@
+        <div class="well" style="background-color: grey">
+
+            <h2 style="color: orange"><strong>Recalls: @Model.Recalls.Count</strong></h2>
+            <div id="tabs">
+                <ul>
+
+                    @for (var j = 1; j <= (int)Model.Recalls.Count; j++)
+                    {
+
+                        <li><a href="#tab-@j">Recall #@j</a></li>
+
+                    }
+                </ul>
+
+
+                @{var i = 1; }
+
+                @foreach (var result in Model.Recalls.Results)
+                {
+                    <div id="tab-@i">
+                        <h3><strong>Recall #@i</strong></h3>
+                        <h3>NHTSA Campaign Number</h3>
+                        <p>@result.NHTSACampaignNumber</p>
+
+                        <h3>NHTSA Action Number:</h3>
+                        <p>@result.NHTSAActionNumber</p>
+
+                        <h3>Component:</h3>
+                        <p>@result.Component</p>
+
+                        <h3> Consequence:</h3>
+                        <p>@result.Conequence</p>
+
+                        <h3>Remedy</h3>
+                        <p>@result.Remedy</p>
+                    </div>
+                    i++;
+                }
+
+
+            </div>
+            <p>
+                <button style="background-color: darkgrey">@Html.ActionLink("Back to List", "Index")</button>
+            </p>
+        </div><!--/ div well-->
+</div><!--/div container-->
+
+ 
+
+
+    
+
+    @section scripts{
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#tabs").tabs();
+            });
+        </script>
+    }
+
